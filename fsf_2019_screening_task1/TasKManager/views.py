@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
-
+from django.http import HttpResponseRedirect, HttpResponse
+from .models import Users
 
 from django.shortcuts import render, get_object_or_404, redirect
 from . import forms
@@ -22,8 +23,8 @@ def signUpPage(request):
             
             Password = form.cleaned_data['Password']
             ConfirmPassword = form.cleaned_data['ConfirmPassword']
-            form.save()
-            return redirect("<h2>Hey congo you created your account</h2>")
+            form.save(commit=True)
+            return HttpResponse("<h2>Hey congo you created your account</h2>")
     else:
         form = forms.SignUpForm()
         return render(request, 'signup.html', {'form': form})
