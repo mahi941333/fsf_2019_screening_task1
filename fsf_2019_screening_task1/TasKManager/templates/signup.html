@@ -11,7 +11,6 @@
 
     <script>
         function validatePassword(password) {
-
             // Do not show anything when the length of password is zero.
             if (password.length === 0) {
                 document.getElementById("msg").innerHTML = "";
@@ -23,7 +22,6 @@
             matchedCase.push("[A-Z]");      // Uppercase Alpabates
             matchedCase.push("[0-9]");      // Numbers
             matchedCase.push("[a-z]");     // Lowercase Alphabates
-
             // Check the conditions
             var ctr = 0;
             for (var i = 0; i < matchedCase.length; i++) {

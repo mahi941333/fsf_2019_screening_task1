@@ -12,7 +12,7 @@ class SignUpForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(), required=True)
+    Password = forms.CharField(widget=forms.PasswordInput(), required=True)
 
     class Meta:
         model = Users
