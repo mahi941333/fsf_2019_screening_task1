@@ -12,24 +12,25 @@ def LoginPage(request):
         obj = forms.LoginForm(request.POST)
         if obj.is_valid():
             model = Users
-            Email = obj.cleaned_data['Email']
-            Password = obj.cleaned_data['Password']
+            Email_Id = obj.cleaned_data['Email']
+            Password1 = obj.cleaned_data['Password']
             typed_email = ''
             typed_pass = ''
             try:
-                typed_email = model.objects.filter(Email=Email).only("email").values_list()[0][2]
-                typed_pass = model.objects.filter(Password=Password).only("email").values_list()[0][4]
+                typed_email = model.objects.filter(Email=Email_Id).only("email").values_list()[0][2]
+                typed_pass = model.objects.filter(Password=Password1).only("email").values_list()[0][4]
                 typed_email = str(typed_email)
                 typed_pass = str(typed_pass)
                 print("----------", typed_email, typed_pass)
             except:
+                print("ooo")
                 pass
 
-        if Email == typed_email and Password == typed_pass:
-                print("entered in box")
-                return render(request, 'afterLogin.html', {'email': Email})
-        else:
-                return HttpResponse("<h2>User may not exist , please signUp first</h2>")
+            if Email_Id == typed_email and Password1 == typed_pass:
+                    print("entered in box")
+                    return render(request, 'afterLogin.html', {'email': Email_Id})
+            else:
+                    return HttpResponse("<h2>User may not exist , please signUp first</h2>")
    else:
         obj = forms.LoginForm()
         print("yaha")
