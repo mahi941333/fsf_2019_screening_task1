@@ -1,48 +1,40 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Create your models here.
+class SignUp(models.Model):
+    username = models.CharField(max_length=100)
+    email_id = models.EmailField(max_length=100)
+    mobile_no = models.IntegerField()
+    password = models.CharField(max_length=40)
+    confrom_pass = models.CharField(max_length=40)
 
-class Users(models.Model):
-    Team_Name=models.CharField(max_length=100)
-    Name=models.CharField(max_length=120)
-    Permission=models.CharField(max_length=50)
-    Username=models.CharField(max_length=70)
-    Password=models.CharField(max_length=50)
-    ConfirmPassword=models.CharField(max_length=50)
-    Email=models.EmailField(max_length=254)
-
-    def __str__ (self):
-        return self.Name
-
-class Team(models.Model):
-    Creator_name=models.CharField(max_length=120)
-    Team_Name=models.CharField(max_length=100)
-    members=models.ManyToManyField(Users)
-    created_date=models.DateTimeField(default = timezone.now)
-    
-    def __str__ (self):
-        return self.Team_Name
-
+    def __str__(self):
+        return self.username
 
 
 class Task(models.Model):
-    status_choice=(('PLANNING','Planning'),('PLANNED','Planned'),
-                   ('INPROGRESS','Inprogress'),('DONE','Done'))
-    Title=models.CharField(max_length=200)
-    Team=models.ForeignKey(Team,on_delete=models.CASCADE)
-    Descripton=models.TextField()
-    Assignee=models.ForeignKey(Users,on_delete=models.CASCADE)
-    Status=models.CharField(max_length=10,choices=status_choice,default='PLANNING')
-
-    def __str__ (self):
-        return self.Title +'-'+self.Assignee
-
-class TeamCreater(models.Model):
-    Users=models.ForeignKey(Users,on_delete=models.CASCADE)
+    status_choice = (
+        ('INPROGRESS', 'Inprogress'), ('NOT ASSIGNED', 'Not assigned'), ('DONE', 'done'), ('PLANNED', 'Planned'))
+    id = models.AutoField(primary_key=True)
+    Title = models.CharField(max_length=150)
+    Description = models.TextField(blank=True)
+    Assignee = models.ForeignKey(SignUp, on_delete=models.CASCADE)
+    Status = models.CharField(choices=status_choice, default='NOT ASSIGNED', blank=False, max_length=50)
+    Time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.Users.Name
+        return self.Title, self.Assignee
 
-    
-    
+
+class Team(models.Model):
+    Creator_name = models.ForeignKey(SignUp, on_delete=models.CASCADE, related_name='teams')
+    Team_Name = models.CharField(max_length=100)
+    members = models.ManyToManyField(SignUp)
+    description = models.TextField(max_length=1024,blank=True)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    # logo = models.ImageField(blank=True)
+    def __str__(self):
+        return self.Team_Name

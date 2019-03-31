@@ -1,0 +1,15 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+{% for Team in object_list %}
+            <div class="post">
+                <div class="date">
+                    <p>Team Name{{ Team.Team_Name}}</p>
+                </div>
+                    <h1><a href="{% url 'TasKManager:detail' Team .id %}">{{ Team.description}}</a></h1>
+                    <p>{{ Team.text|linebreaksbr }}</p>
+
+            </div>
+{% endfor %}
+{% endfor %}
+{% endblock %}

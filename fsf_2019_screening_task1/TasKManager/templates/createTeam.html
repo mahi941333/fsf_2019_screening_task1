@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load staticfiles %}
+{% load bootstrap3 %}
+<head>
+    <meta charset="UTF-8">
+    <title>Create Team page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="nav bar">
+      <h2><center>HI TEAM ENTER DETAILS HERE!</center></h2>
+  </div>
+    <form class="form-horizontal" method="post" action="#">
+
+        <div class="form-group">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group ">
+                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">
+				<a href="">Submit
+                </button>
+            </div>
+        </div>
+		
+		 
+    </form>
+</div>
+</body>
+</html>
