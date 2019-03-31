@@ -15,8 +15,9 @@ pytz==2018.9
 ## how to run the application:
 <br>
 go to the directory "fossee\fsf_2019_screening_task1"
-then run manage.py file
-''' python manage.py run server '''
+then run manage.py file<br>
+```python manage.py run server 
+```
 
 
 <br>
